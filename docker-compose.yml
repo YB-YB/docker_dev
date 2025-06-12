@@ -2,11 +2,21 @@ version: '3.8'
 
 services:
   dev-env:
-    build: .
+    build:
+      context: .
     container_name: dev-environment
+    privileged: true  # 添加特权模式，解决权限问题
     volumes:
       - ./app:/app
       - ./requirements.txt:/requirements.txt
+      # 源码挂载 - 可以添加多个源码目录
+      - /home/binyang/RuoYi-Vue3-FastAPI:/workspace/RuoYi-Vue3-FastAPI
+      # - /path/to/another/project:/workspace/another-project
+      # - /path/to/third/project:/workspace/third-project
+    working_dir: /workspace
+    environment:
+      # 设置默认项目目录，可以根据需要修改
+      - DEFAULT_PROJECT=RuoYi-Vue3-FastAPI
     ports:
       - "8000:8000"  # 为Python应用预留
       - "3000:3000"  # 为Node.js应用预留

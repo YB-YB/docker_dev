@@ -34,18 +34,22 @@ COPY requirements.txt .
 # 安装Python依赖
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 创建非root用户
-RUN groupadd -r developer && useradd -r -g developer developer
-RUN mkdir -p /home/developer && chown -R developer:developer /home/developer
+# 创建工作目录
+RUN mkdir -p /app /workspace
 
-# 设置工作目录权限
-RUN chown -R developer:developer /app
-
-# 切换到非root用户
-USER developer
-
-# 设置PATH以包含用户安装的npm全局包
+# 设置PATH
 ENV PATH="/home/developer/.local/bin:/home/developer/node_modules/.bin:${PATH}"
+
+# 复制脚本
+COPY app/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY app/switch_project.sh /usr/local/bin/switch_project
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/switch_project
+
+# 设置工作目录
+WORKDIR /workspace
+
+# 设置入口点
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # 设置容器启动命令
 CMD ["bash"]
