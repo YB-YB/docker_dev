@@ -1,0 +1,39 @@
+# 基本工具
+pip>=23.0.1
+setuptools>=67.6.1
+wheel>=0.40.0
+
+# Web框架和API开发
+fastapi[all]==0.115.8
+uvicorn>=0.21.1
+
+# 数据库和缓存
+asyncmy==0.2.10
+PyMySQL==1.1.1
+redis==5.2.1
+SQLAlchemy[asyncio]==2.0.38
+sqlglot[rs]==26.6.0
+
+# 数据处理
+pandas==2.2.3
+numpy>=1.24.2
+openpyxl==3.1.5
+
+# 认证和安全
+passlib[bcrypt]==1.7.4
+PyJWT[crypto]==2.10.1
+
+# 工具库
+APScheduler==3.11.0
+DateTime==5.5
+loguru==0.7.3
+Pillow==11.1.0
+psutil==7.0.0
+pydantic-validation-decorator==0.1.4
+python-dotenv>=1.0.0
+pyyaml>=6.0
+requests==2.32.3
+user-agents==2.2.0
+
+# 测试工具
+pytest>=7.3.1
