@@ -41,9 +41,10 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql
+    privileged: true  # 添加特权模式，解决权限问题
     volumes:
       - ./data/mysql:/var/lib/mysql
-      - ./config/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - ./config/my.cnf:/etc/mysql/conf.d/my.cnf:rw
     ports:
       - "3306:3306"
     environment:
@@ -62,9 +63,10 @@ services:
   redis:
     image: redis:latest
     container_name: redis
+    privileged: true  # 添加特权模式，解决权限问题
     volumes:
       - ./data/redis:/data
-      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:rw
     ports:
       - "6379:6379"
     command: redis-server /usr/local/etc/redis/redis.conf
